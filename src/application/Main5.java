@@ -1,5 +1,9 @@
 package application;
 	
+
+
+import java.util.Iterator;
+
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -7,32 +11,49 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class Main extends Application {
+public class Main5 extends Application {
+	int num = 1;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			//fxml layout loader
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("hello.fxml"));
+			loader.setLocation(getClass().getResource("main5.fxml"));
 			
 			//window root
 			AnchorPane mainLayoutAnchorPane = (AnchorPane) loader.load();
 			Scene scene = new Scene(mainLayoutAnchorPane);
-			Label lbl = (Label) scene.lookup("#lbl");
+			
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+			TextField tfMine = (TextField) scene.lookup("#tfMine");
+			TextField tfCom = (TextField) scene.lookup("#tfCom");
+			TextField tfResult = (TextField) scene.lookup("#tfResult");
 			Button btn = (Button) scene.lookup("#btn");
 			btn.setOnMouseClicked(new EventHandler<Event>() {
 
 				@Override
 				public void handle(Event event) {
-					lbl.setText("Good Evening");
+					double random = Math.random();
+					if(random < 0.5) {
+						tfCom.setText("È¦");
+					}else
+						tfCom.setText("Â¦");
+					String a = tfMine.getText();
+					String b = tfCom.getText();
+					
+					if(a.equals(b)) {
+						tfResult.setText("¼º°ø!");
+					}else
+						tfResult.setText("½ÇÆÐ!");
 				}
 				
 			});
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			primaryStage.setTitle("first javaFx button show");
 			primaryStage.setScene(scene);

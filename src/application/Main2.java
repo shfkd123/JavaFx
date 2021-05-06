@@ -11,28 +11,36 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class Main extends Application {
+public class Main2 extends Application {
+	int num = 1;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			//fxml layout loader
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("hello.fxml"));
+			loader.setLocation(getClass().getResource("main2.fxml"));
 			
 			//window root
 			AnchorPane mainLayoutAnchorPane = (AnchorPane) loader.load();
 			Scene scene = new Scene(mainLayoutAnchorPane);
+			
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			Label lbl = (Label) scene.lookup("#lbl");
 			Button btn = (Button) scene.lookup("#btn");
 			btn.setOnMouseClicked(new EventHandler<Event>() {
 
 				@Override
 				public void handle(Event event) {
-					lbl.setText("Good Evening");
+					String a = lbl.getText();
+					int aa = Integer.parseInt(a);
+					aa++;
+					lbl.setText(aa + "");
+					/*
+					 * num++; lbl.setText("" + num);
+					 */
 				}
 				
 			});
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
 			primaryStage.setTitle("first javaFx button show");
 			primaryStage.setScene(scene);
